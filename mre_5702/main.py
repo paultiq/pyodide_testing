@@ -23,7 +23,7 @@ def main():
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    #options.add_argument("--disable-dev-shm-usage")
 
     if "CHROME_PATH" in os.environ:
         options.binary_location = os.environ["CHROME_PATH"]
@@ -35,7 +35,8 @@ def main():
 
     try:
         with webdriver.Chrome(options=options, service=service) as driver:
-
+            version = driver.capabilities["browserVersion"]
+            logger.info("Chrome version: %s", version)
             url = file.resolve().as_uri()
             logger.info(f"Opening {url=}")
             driver.get(url)
@@ -45,7 +46,7 @@ def main():
                 if (hasSuspending) delete WebAssembly.Suspending;
                 return hasSuspending;
                 """)
-            print("WebAssembly.Suspending exists (JSPI is available):", exists)
+            logger.info("WebAssembly.Suspending exists (JSPI is available): %s", exists)
 
             WebDriverWait(driver, 120).until(
                 EC.text_to_be_present_in_element((By.ID, "output"), "iteration: 10")
@@ -55,7 +56,7 @@ def main():
             logger.info("Success: Ran to the end")
 
             for entry in driver.get_log("browser"):
-                print(entry["message"])
+                logger.info(entry["message"])
     except Exception:
         logger.exception("Failure: Exception during execution")
         sys.exit(1)
