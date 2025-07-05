@@ -1,4 +1,4 @@
-name: "Test 5702
+name: "Test 5702"
 
 on:
   workflow_dispatch:
