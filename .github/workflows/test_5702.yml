@@ -44,8 +44,10 @@ jobs:
         run: |
           echo "CHROMEDRIVER_PATH=$CHROMEDRIVER_PATH"
           $CHROMEDRIVER_PATH --version
-      - name: Check Chrome version
-        run: google-chrome --version || "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
+      - name: Output Chrome Info
+        run: |
+          google-chrome --version
+          chromedriver --version
       - name: Check out code
         uses: actions/checkout@v4
         with:
