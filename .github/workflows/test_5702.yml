@@ -37,6 +37,8 @@ jobs:
           chrome-version: ${{ matrix.chrome-version }}
           install-dependencies: true                     
           install-chromedriver: true  
+      - name: Export CHROMEDRIVER_PATH
+        run: echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}" >> $GITHUB_ENV
       - name: Check out code
         uses: actions/checkout@v4
         with:
