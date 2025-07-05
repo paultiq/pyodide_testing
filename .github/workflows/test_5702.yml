@@ -19,11 +19,13 @@ jobs:
     strategy:
       matrix:
         os:
-          #- "ubuntu-latest"
+          - "ubuntu-latest"
           - "windows-latest"
-          #- "macos-latest"
+          - "macos-latest"
         chrome-version:
-          #- 135
+          - 135
+          - 136
+          - 137
           - 138
         python-version:
           - "3.12"

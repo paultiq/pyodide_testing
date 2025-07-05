@@ -1,5 +1,7 @@
 from selenium import webdriver
 import logging
+import sys
+
 from pathlib import Path
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -45,7 +47,8 @@ def main():
                 print(entry["message"])
     except Exception:
         logger.exception("Failure: Exception during execution")
-    
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
