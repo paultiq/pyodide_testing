@@ -29,7 +29,7 @@ def main():
 
 
     try:
-        with webdriver.Chrome(options=options) as driver:
+        with webdriver.Chrome(options=options, service=service) as driver:
 
             url = file.resolve().as_uri()
             logger.info(f"Opening {url=}")
