@@ -40,6 +40,12 @@ jobs:
           install-chromedriver: true  
       - name: Export CHROMEDRIVER_PATH
         run: echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}" >> $GITHUB_ENV
+      - name: Debug ChromeDriver path
+        run: |
+          echo "CHROMEDRIVER_PATH=$CHROMEDRIVER_PATH"
+          $CHROMEDRIVER_PATH --version
+      - name: Check Chrome version
+        run: google-chrome --version || "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
       - name: Check out code
         uses: actions/checkout@v4
         with:
