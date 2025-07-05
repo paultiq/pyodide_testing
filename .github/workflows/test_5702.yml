@@ -33,6 +33,7 @@ jobs:
 
     steps:
       - uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
         with:
           chrome-version: ${{ matrix.chrome-version }}
           install-dependencies: true                     
