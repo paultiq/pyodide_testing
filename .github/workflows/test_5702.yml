@@ -42,7 +42,7 @@ jobs:
         run: |
           echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}" >> $GITHUB_ENV
           echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
-          echo "CHROME_USER_DATA_DIR=$RUNNER_TEMP/chrome-profile-$GITHUB_RUN_ID" >> $GITHUB_ENV
+          # echo "CHROME_USER_DATA_DIR=$RUNNER_TEMP/chrome-profile-$GITHUB_RUN_ID" >> $GITHUB_ENV
       - name: Debug ChromeDriver path
         run: |
           echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}"
