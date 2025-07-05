@@ -1,6 +1,9 @@
 name: "Test 5702"
 
 on:
+  push:
+    branches:
+      - '**'
   workflow_dispatch:
 
 defaults:
