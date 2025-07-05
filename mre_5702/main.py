@@ -23,7 +23,6 @@ def main():
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
-    options.add_argument("--enable-blink-features=JavaScriptPromiseIntegration")
     
     #options.add_argument("--disable-dev-shm-usage")
 
