@@ -43,6 +43,7 @@ def main():
 
             exists = driver.execute_script("""
                 const hasSuspending = !!WebAssembly.Suspending;
+                return hasSuspending;
                 //if (hasSuspending) delete WebAssembly.Suspending;
                 //    return hasSuspending;
                 """)
