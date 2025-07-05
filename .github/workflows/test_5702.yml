@@ -20,8 +20,8 @@ jobs:
       matrix:
         os:
           - "ubuntu-latest"
-          - "windows-latest"
-          - "macos-latest"
+          #- "windows-latest"
+          #- "macos-latest"
         chrome-version:
           - 135.0.7049.42
           - 136.0.7103.49
@@ -42,6 +42,7 @@ jobs:
         run: |
           echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}" >> $GITHUB_ENV
           echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+          echo "CHROME_USER_DATA_DIR=$RUNNER_TEMP/chrome-profile" >> $GITHUB_ENV
       - name: Debug ChromeDriver path
         run: |
           echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}"

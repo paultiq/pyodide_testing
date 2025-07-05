@@ -31,7 +31,8 @@ def main():
         service=Service(executable_path=os.environ["CHROMEDRIVER_PATH"])
     else:
         service=None
-
+    if "CHROME_USER_DATA_DIR" in os.environ:
+        options.add_argument(f"--user-data-dir={os.environ['CHROME_USER_DATA_DIR']}")
 
     try:
         with webdriver.Chrome(options=options, service=service) as driver:
