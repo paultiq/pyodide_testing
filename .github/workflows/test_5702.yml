@@ -46,7 +46,7 @@ jobs:
           $CHROMEDRIVER_PATH --version
       - name: Output Chrome Info
         run: |
-          google-chrome --version
+          chrome --version
           chromedriver --version
       - name: Check out code
         uses: actions/checkout@v4
