@@ -19,8 +19,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - "ubuntu-latest"
-          #- "windows-latest"
+          #- "ubuntu-latest"
+          - "windows-latest"
           #- "macos-latest"
         chrome-version:
           #- 135

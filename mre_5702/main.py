@@ -32,12 +32,19 @@ def main():
             WebDriverWait(driver, 120).until(
                 EC.text_to_be_present_in_element((By.ID, "output"), "iteration: 10")
             )
+            exists = driver.execute_script("""
+                const hasSuspending = !!WebAssembly.Suspending;
+                if (hasSuspending) delete WebAssembly.Suspending;
+                return hasSuspending;
+                """)
+            print("WebAssembly.Suspending exists (JSPI is available):", exists)
+
             logger.info("Success: Ran to the end")
 
             for entry in driver.get_log("browser"):
                 print(entry["message"])
-    except Exception as e:
-        logger.error("Failure: Exception during execution")
+    except Exception:
+        logger.exception("Failure: Exception during execution")
     
 
 if __name__ == "__main__":
