@@ -12,12 +12,9 @@ permissions:
 
 jobs:
   tests:
-    name: "${{ matrix.python-version }}"
+    name: "${{ matrix.os }} - Chrome ${{ matrix.chrome-version }} - Python ${{ matrix.python-version }}"
     runs-on: "${{ matrix.os }}"
     timeout-minutes: 60
-
-    env:
-      TOX_GH_MAJOR_MINOR: "${{ matrix.python-version }}"
 
     strategy:
       matrix:
