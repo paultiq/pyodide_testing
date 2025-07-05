@@ -21,8 +21,8 @@ def main():
     assert file.exists()
 
     options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
+    #options.add_argument("--headless")
+    #options.add_argument("--no-sandbox")
     #options.add_argument("--disable-dev-shm-usage")
 
     if "CHROME_PATH" in os.environ:
@@ -43,8 +43,8 @@ def main():
 
             exists = driver.execute_script("""
                 const hasSuspending = !!WebAssembly.Suspending;
-                if (hasSuspending) delete WebAssembly.Suspending;
-                return hasSuspending;
+                //if (hasSuspending) delete WebAssembly.Suspending;
+                //    return hasSuspending;
                 """)
             logger.info("WebAssembly.Suspending exists (JSPI is available): %s", exists)
 
