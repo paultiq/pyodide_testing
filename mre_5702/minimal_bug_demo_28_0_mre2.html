@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pyodide MRE from test_stack_switching Memory Leak</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    #output { white-space: pre-line; background: #f0f0f0; padding: 10px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Pyodide Memory Leak: MRE from test_stack_switching</h1>
+  <p>This replicates the memory leak test from Pyodide's test suite.</p>
+  <div id="output">Loading Pyodide...</div>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.js"></script>
+  <script>
+    let pyodide;
+    const output = document.getElementById('output');
+
+    (async () => {
+      // delete WebAssembly.Suspending;
+
+      pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.28.0/full/' });
+
+      output.textContent = "Running memory leak test...";
+      await pyodide.runPythonAsync(`async def noop(): pass`);
+
+      for (let iteration = 0; iteration < 1000; iteration++) {
+        const noop = pyodide.globals.get("noop");
+
+        for (let i = 0; i < 100; i++) {
+            let p2 = [];
+            for (let j = 0; j < 200; j++) {
+              p2.push(noop());
+            }
+            await Promise.all(p2);
+        }
+
+        //test.destroy();
+
+        output.textContent += `\niteration: ${iteration}`;
+    }})();
+
+  </script>
+</body>
+</html>

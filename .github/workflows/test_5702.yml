@@ -1,0 +1,53 @@
+name: "Test 5702
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: "${{ matrix.python-version }}"
+    runs-on: "${{ matrix.os }}"
+    timeout-minutes: 60
+
+    env:
+      TOX_GH_MAJOR_MINOR: "${{ matrix.python-version }}"
+
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+          #- "windows-latest"
+          #- "macos-latest"
+        chrome-version:
+          #- 135
+          - 138
+        python-version:
+          - "3.12"
+      fail-fast: false
+
+    steps:
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: ${{ matrix.chrome-version }}
+
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+      - name: "Run test"
+        run: |
+          python mre_5702/main.py
