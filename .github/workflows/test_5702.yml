@@ -33,7 +33,6 @@ jobs:
       - uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: ${{ matrix.chrome-version }}
-
       - name: Check out code
         uses: actions/checkout@v4
         with:
@@ -42,6 +41,8 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
+          activate-environment: true
+
       - uses: actions/setup-python@v5
         with:
           python-version: 3.12
