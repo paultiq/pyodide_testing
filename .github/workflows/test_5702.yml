@@ -39,15 +39,18 @@ jobs:
           install-dependencies: true                     
           install-chromedriver: true  
       - name: Export CHROMEDRIVER_PATH
-        run: echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}" >> $GITHUB_ENV
+        run: |
+          echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}" >> $GITHUB_ENV
+          echo "CHROME_PATH=${{ github.workspace }}/chrome/chrome-win64/chrome.exe" >> $GITHUB_ENV
       - name: Debug ChromeDriver path
         run: |
+          echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}"
+          echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-version }}"
+          echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chrome-path }}"
+          echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" 
+
           echo "CHROMEDRIVER_PATH=$CHROMEDRIVER_PATH"
           $CHROMEDRIVER_PATH --version
-      - name: Output Chrome Info
-        run: |
-          chrome --version
-          chromedriver --version
       - name: Check out code
         uses: actions/checkout@v4
         with:

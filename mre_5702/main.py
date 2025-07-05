@@ -19,13 +19,18 @@ def main():
     file = Path("mre_5702/minimal_bug_demo_28_0_mre2.html")
 
     assert file.exists()
-    assert "CHROMEDRIVER_PATH" in os.environ
 
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    service=Service(executable_path=os.environ["CHROMEDRIVER_PATH"])
+
+    if "CHROME_PATH" in os.environ:
+        options.binary_location = os.environ["CHROME_PATH"]
+    if "CHROMEDRIVER_PATH" in os.environ:
+        service=Service(executable_path=os.environ["CHROMEDRIVER_PATH"])
+    else:
+        service=None
 
 
     try:
