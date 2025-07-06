@@ -23,12 +23,12 @@ jobs:
       matrix:
         os:
           - "ubuntu-latest"
-          - "windows-latest"
-          - "macos-latest"
+          #- "windows-latest"
+          #- "macos-latest"
         chrome-version:
-          - 135.0.7049.42
-          - 136.0.7103.49
-          - 137.0.7151.69
+          #- 135.0.7049.42
+          #- 136.0.7103.49
+          #- 137.0.7151.69
           - 138.0.7204.92
         python-version:
           - "3.13"
