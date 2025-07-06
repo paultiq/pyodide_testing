@@ -35,6 +35,9 @@ jobs:
           - "v0.27.7"
           - "v0.27.0"
           - "v0.26.4"
+          - "v0.26.3"
+          - "v0.26.2"
+          - "v0.26.1"
           - "v0.26.0"
           - "v0.25.0"
 
@@ -45,10 +48,6 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/cache@v4
-        with:
-          path: ${{ runner.tool_cache }}
-          key: ${{ runner.os }}-chrome-${{ matrix.chrome-version }}
       - uses: browser-actions/setup-chrome@v1
         id: setup-chrome
         with:
