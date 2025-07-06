@@ -20,9 +20,19 @@ def main():
 
     assert file.exists()
 
+    enable_jspi = True if os.environ["ENABLE_JSPI"].lower()=="true" else False
+
+
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
+    
+    if enable_jspi: 
+        logger.info("Enabling JSPI, not needed 137+")
+        options.add_experimental_option(
+        "localState",
+        {"browser.enabled_labs_experiments": ["enable-experimental-webassembly-jspi@1"]}
+        )
     
     #options.add_argument("--disable-dev-shm-usage")
 
@@ -42,6 +52,13 @@ def main():
             url = file.resolve().as_uri()
             logger.info(f"Opening {url=}")
             driver.get(url)
+
+
+            logger.info("Disabling JSPI, not needed above below 137")
+            driver.execute_script("""
+                if (hasSuspending) delete WebAssembly.Suspending;
+                    return hasSuspending;
+                """)
 
             exists = driver.execute_script("""
                 const hasSuspending = !!WebAssembly.Suspending;
