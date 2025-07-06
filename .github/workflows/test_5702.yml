@@ -34,7 +34,7 @@ jobs:
           - "v0.28.0"
           - "v0.27.7"
         enable_jspi: 
-          - True
+          - "False"
         python-version:
           - "3.13"
       fail-fast: false
