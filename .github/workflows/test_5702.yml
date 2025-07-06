@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   tests:
-    name: "${{ matrix.os }} - Chrome ${{ matrix.chrome-version }} - Python ${{ matrix.python-version }}"
+    name: "${{ matrix.pyodide-version }}-${{ matrix.os }}-${{ matrix.chrome-version }}-${{ matrix.python-version }}"
     runs-on: "${{ matrix.os }}"
     timeout-minutes: 60
 
@@ -31,8 +31,8 @@ jobs:
           #- 137.0.7151.69
           #- 138.0.7204.92
         pyodide-version:
-          - v0.28.0
-          - v0.27.7
+          - "v0.28.0"
+          - "v0.27.7"
         enable_jspi: 
           - True
         python-version:
