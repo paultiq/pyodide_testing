@@ -26,9 +26,9 @@ jobs:
           #- "windows-latest"
           #- "macos-latest"
         chrome-version:
-          - 135.0.7049.42
+          #- 135.0.7049.42
           #- 136.0.7103.49
-          #- 137.0.7151.69
+          - 137.0.7151.69
           #- 138.0.7204.92
         pyodide-version:
           - "v0.28.0"
@@ -37,7 +37,7 @@ jobs:
           - "v0.26.4"
 
         enable_jspi: 
-          - "False"
+          - "True"
         python-version:
           - "3.13"
       fail-fast: false
