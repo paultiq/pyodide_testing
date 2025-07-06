@@ -17,8 +17,21 @@ logger = logging.getLogger(__name__)
 
 def main():
     file = Path("mre_5702/minimal_bug_demo_28_0_mre2.html")
-
     assert file.exists()
+
+
+    if "PYODIDE_VERSION" in os.environ:
+        pyodide_version = os.environ.get("PYODIDE_VERSION", "v0.28.0")
+        file_body = file.read_text()
+
+        assert "PYODIDE_VERSION" in file_body, "PYODIDE_VERSION in environment but not in the HTML body"
+
+        logger.info("Replacing PYODIDE_VERSION in file_body with %s", pyodide_version)
+        file_body_updated = file_body.replace("PYODIDE_VERSION", pyodide_version)
+
+        file.write_text(file_body_updated)
+
+
 
     enable_jspi = True if os.environ["ENABLE_JSPI"].lower()=="true" else False
 

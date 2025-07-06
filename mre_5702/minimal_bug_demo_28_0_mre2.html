@@ -12,7 +12,7 @@
   <p>This replicates the memory leak test from Pyodide's test suite.</p>
   <div id="output">Loading Pyodide...</div>
 
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/PYODIDE_VERSION/full/pyodide.js"></script>
   <script>
     let pyodide;
     const output = document.getElementById('output');
@@ -20,7 +20,7 @@
     (async () => {
       // delete WebAssembly.Suspending;
 
-      pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.28.0/full/' });
+      pyodide = await loadPyodide();
 
       output.textContent = "Running memory leak test...";
       await pyodide.runPythonAsync(`async def noop(): pass`);
