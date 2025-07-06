@@ -33,6 +33,9 @@ jobs:
         pyodide-version:
           - "v0.28.0"
           - "v0.27.7"
+          - "v0.27.0"
+          - "v0.26.4"
+
         enable_jspi: 
           - "False"
         python-version:
