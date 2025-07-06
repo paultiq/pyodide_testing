@@ -53,14 +53,14 @@ def main():
             logger.info(f"Opening {url=}")
             driver.get(url)
 
+            if not enable_jspi:
+                logger.info("Disabling JSPI, not needed above below 137")
+                driver.execute_script("""
+                    const hasSuspending = !!WebAssembly.Suspending;
 
-            logger.info("Disabling JSPI, not needed above below 137")
-            driver.execute_script("""
-                const hasSuspending = !!WebAssembly.Suspending;
-
-                if (hasSuspending) delete WebAssembly.Suspending;
-                    return hasSuspending;
-                """)
+                    if (hasSuspending) delete WebAssembly.Suspending;
+                        return hasSuspending;
+                    """)
 
             exists = driver.execute_script("""
                 const hasSuspending = !!WebAssembly.Suspending;
