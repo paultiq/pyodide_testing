@@ -56,6 +56,8 @@ def main():
 
             logger.info("Disabling JSPI, not needed above below 137")
             driver.execute_script("""
+                const hasSuspending = !!WebAssembly.Suspending;
+
                 if (hasSuspending) delete WebAssembly.Suspending;
                     return hasSuspending;
                 """)
