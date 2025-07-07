@@ -22,8 +22,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - "ubuntu-latest"
-          #- "windows-latest"
+          #- "ubuntu-latest"
+          - "windows-latest"
           #- "macos-latest"
         chrome-version:
           - 134.0.6998.90
@@ -33,14 +33,14 @@ jobs:
           #- 138.0.7204.92
         pyodide-version:
           - "v0.28.0"
-          - "v0.27.7"
-          - "v0.27.0"
-          - "v0.26.4"
-          - "v0.26.3"
-          - "v0.26.2"
-          - "v0.26.1"
-          - "v0.26.0"
-          - "v0.25.0"
+          # - "v0.27.7"
+          # - "v0.27.0"
+          # - "v0.26.4"
+          # - "v0.26.3"
+          # - "v0.26.2"
+          # - "v0.26.1"
+          # - "v0.26.0"
+          # - "v0.25.0"
 
         enable_jspi: 
           - "True"
