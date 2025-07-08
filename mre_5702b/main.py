@@ -20,19 +20,20 @@ def main():
 
 
 
-    enable_jspi = True if os.environ.get("ENABLE_JSPI", "True").lower()=="true" else False
-
 
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     
-    if enable_jspi: 
-        logger.info("Enabling JSPI, not needed 137+")
-        options.add_experimental_option(
-        "localState",
-        {"browser.enabled_labs_experiments": ["enable-experimental-webassembly-jspi@1"]}
-        )
+    
+    # enable_jspi = True if os.environ.get("ENABLE_JSPI", "True").lower()=="true" else False
+
+    # if enable_jspi: 
+    #     logger.info("Enabling JSPI, not needed 137+")
+    #     options.add_experimental_option(
+    #     "localState",
+    #     {"browser.enabled_labs_experiments": ["enable-experimental-webassembly-jspi@1"]}
+    #     )
     
     #options.add_argument("--disable-dev-shm-usage")
 
@@ -53,6 +54,14 @@ def main():
             logger.info("Chrome version: %s", version)
 
             driver.get("about:blank")
+            
+            exists = driver.execute_script("""
+                const hasSuspending = !!WebAssembly.Suspending;
+                return hasSuspending;
+
+                """)
+            logger.info("WebAssembly.Suspending exists (JSPI is available): %s", exists)
+
             driver.execute_async_script("let cb=arguments[0];(async()=>{if(window.pyodide){cb();return;}let s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.28.0/debug/pyodide.js';s.onload=async()=>{window.pyodide=await loadPyodide();cb();};document.head.appendChild(s);})();")
 
 
@@ -70,23 +79,6 @@ def main():
                     await Promise.all(p2);
                 }
                                   """)
-
-
-            if not enable_jspi:
-                logger.info("Disabling JSPI, not needed above below 137")
-                driver.execute_script("""
-                    const hasSuspending = !!WebAssembly.Suspending;
-
-                    if (hasSuspending) delete WebAssembly.Suspending;
-                        return hasSuspending;
-                    """)
-
-            exists = driver.execute_script("""
-                const hasSuspending = !!WebAssembly.Suspending;
-                return hasSuspending;
-
-                """)
-            logger.info("WebAssembly.Suspending exists (JSPI is available): %s", exists)
 
 
             logger.info("Success: Ran to the end")
