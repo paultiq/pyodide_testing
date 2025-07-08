@@ -22,11 +22,11 @@ jobs:
     strategy:
       matrix:
         os:
-          #- "ubuntu-latest"
+          - "ubuntu-latest"
           - "windows-latest"
-          #- "macos-latest"
+          - "macos-latest"
         chrome-version:
-          - 134.0.6998.90
+          #- 134.0.6998.90
           #- 135.0.7049.42
           #- 136.0.7103.49
           - 137.0.7151.69
@@ -86,4 +86,4 @@ jobs:
         run: python --version
       - name: "Run test"
         run: |
-          python mre_5702/main.py
+          python mre_5702b/main.py
